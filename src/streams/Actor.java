@@ -1,15 +1,27 @@
-package sortingLists;
+package streams;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ubu on 03/12/16.
  */
-public class People {
+public class Actor {
     private String firstName;
     private String lastName;
+    private List<Movie> playedIn = new ArrayList<>();
 
-    public People(String firstName, String lastName) {
+    public Actor(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public void addMovie(Movie movie) {
+        playedIn.add(movie);
+    }
+
+    public List<Movie> getPlayedIn() {
+        return playedIn;
     }
 
     public String getFirstName() {
