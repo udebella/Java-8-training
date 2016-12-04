@@ -10,7 +10,7 @@ public class Person {
         this.car = car;
     }
 
-    public Object getInsuranceName() {
+    public String getInsuranceName() {
         if (car != null) {
             if (car.getInsurance() != null) {
                 return car.getInsurance().getName();
