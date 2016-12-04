@@ -3,7 +3,7 @@ package factory;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by ubu on 03/12/16.
@@ -28,9 +28,8 @@ public class BirdFactoryTest {
         assertEquals("It should create a sparrow", bird.getClass(), Sparrow.class);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCreationWoodpecker() {
-        IBird bird = factory.createBird(BirdType.Woodpecker);
-        assertNull("Woodpecker are not handled by the factory", bird);
+        factory.createBird(BirdType.Woodpecker);
     }
 }
