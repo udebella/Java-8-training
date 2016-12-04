@@ -25,7 +25,7 @@ public class TaxCalculatorTest {
     @Test
     public void calculateTaxForMarriedPerson() {
         IPersonTypeCalculator personTypeCalculator = new MarriedPersonCalculator();
-        assertEquals("Taxes should be 5% for a person wich is married", 500, taxCalculator.getTaxes(10000, personTypeCalculator), 0);
+        assertEquals("Taxes should be 5% for a person which is married", 500, taxCalculator.getTaxes(10000, personTypeCalculator), 0);
     }
 
 }
