@@ -1,6 +1,7 @@
 package streams;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by ubu on 03/12/16.
@@ -16,70 +17,54 @@ public class Directory {
         return printList(this.actorList);
     }
 
-    private String printList(Collection listToPrint) {
-        StringBuilder directoryAsString = new StringBuilder();
-        int counter = 0;
-        for (Object object : listToPrint) {
-            directoryAsString.append(object.toString());
-            if (++counter < listToPrint.size()) {
-                directoryAsString.append(", ");
-            }
-        }
-        return directoryAsString.toString();
+    private String printList(Collection<?> listToPrint) {
+        return listToPrint.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 
     public String printOrderedByName() {
-        List<Actor> actors = new ArrayList<>(actorList);
-        actors.sort(new Comparator<Actor>() {
-            @Override
-            public int compare(Actor o1, Actor o2) {
-                return o1.getLastName().compareTo(o2.getLastName());
-            }
-        });
-        return printList(actors);
+        return actorList.stream()
+                .sorted((o1, o2) -> o1.getLastName().compareTo(o2.getLastName()))
+                .map(Actor::toString)
+                .collect(Collectors.joining(", "));
     }
 
     public String printMovies() {
-        Set<String> movies = new LinkedHashSet<>();
-        for (Actor actor : actorList) {
-            for (Movie movie : actor.getPlayedIn()) {
-                movies.add(movie.toString());
-            }
-        }
-        return printList(movies);
+        return actorList.stream()
+                .map(Actor::getPlayedIn)
+                .flatMap(Collection::stream) // Here we have a Stream<List<Movie>> so we need to flatten it to get Stream<Movie>
+                .map(Movie::toString)
+                .distinct()
+                .collect(Collectors.joining(", "));
     }
 
     public String printActorsWhoPlayedIn(String movieName) {
-        Set<String> actors = new LinkedHashSet<>();
-        for (Actor actor : actorList) {
-            for (Movie movie : actor.getPlayedIn()) {
-                if (movie.getName().contains(movieName)) {
-                    actors.add(actor.toString());
-                }
-            }
-        }
-        return printList(actors);
+        return actorList.stream()
+                .filter(actor -> actor.getPlayedIn().stream()
+                        .map(Movie::getName)
+                        .filter(name -> name.contains(movieName))
+                        .findAny()
+                        .isPresent())
+                .map(Actor::toString)
+                .collect(Collectors.joining(", "));
     }
 
-    public String printMoviesByYear(int year) {
-        Set<String> movies = new LinkedHashSet<>();
-        for (Actor actor : actorList) {
-            for (Movie movie : actor.getPlayedIn()) {
-                if (movie.getYear() == year) {
-                    movies.add(movie.toString());
-                }
-            }
-        }
-        return printList(movies);
+    public String printMoviesByYear(int movieYear) {
+        return actorList.stream()
+                .map(Actor::getPlayedIn)
+                .flatMap(Collection::stream) // We convert Stream<List<Movie>> to Stream<Movie>
+                .filter(movie -> movie.getYear() == movieYear)
+                .map(Movie::toString)
+                .distinct()
+                .collect(Collectors.joining(", "));
     }
 
     public Map<String,List<Actor>> retrieveActorsByMovie() {
         Map<String, List<Actor>> actorsByMovie = new HashMap<>();
         for (Actor actor : actorList) {
             for (Movie movie : actor.getPlayedIn()) {
-                if (actorsByMovie.get(movie.toString()) == null) {
-                    actorsByMovie.put(movie.toString(), new ArrayList<Actor>());
-                }
+                actorsByMovie.putIfAbsent(movie.toString(), new ArrayList<>());
                 actorsByMovie.get(movie.toString()).add(actor);
             }
         }
