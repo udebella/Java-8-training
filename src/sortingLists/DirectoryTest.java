@@ -38,22 +38,12 @@ public class DirectoryTest {
 
     @Test
     public void testSorting() {
-        Comparator<People> comparatorLastName = new Comparator<People>() {
-            @Override
-            public int compare(People o1, People o2) {
-                return o1.getLastName().compareTo(o2.getLastName());
-            }
-        };
+        Comparator<People> comparatorLastName = (o1, o2) -> o1.getLastName().compareTo(o2.getLastName());
         assertEquals("It should sort people by last name",
                 "Josiane Balasko, Michel Blanc, Christian Clavier, Gérard Jugnot",
                 directory.sort(comparatorLastName).toString());
 
-        Comparator<People> comparatorFirstName = new Comparator<People>() {
-            @Override
-            public int compare(People o1, People o2) {
-                return o1.getFirstName().compareTo(o2.getFirstName());
-            }
-        };
+        Comparator<People> comparatorFirstName = (o1, o2) -> o1.getFirstName().compareTo(o2.getFirstName());
         assertEquals("It should sort people by first name",
                 "Christian Clavier, Gérard Jugnot, Josiane Balasko, Michel Blanc",
                 directory.sort(comparatorFirstName).toString());

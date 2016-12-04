@@ -3,6 +3,7 @@ package sortingLists;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by ubu on 03/12/16.
@@ -20,14 +21,8 @@ public class Directory {
     }
 
     public String toString() {
-        StringBuilder directoryAsString = new StringBuilder();
-        int counter = 0;
-        for (People people : peopleList) {
-            directoryAsString.append(people.toString());
-            if (++counter < peopleList.size()) {
-                directoryAsString.append(", ");
-            }
-        }
-        return directoryAsString.toString();
+        return peopleList.stream()
+                .map(People::toString)
+                .collect(Collectors.joining(", "));
     }
 }
