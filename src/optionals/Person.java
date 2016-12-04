@@ -1,21 +1,24 @@
 package optionals;
 
+import java.util.Optional;
+
 /**
  * Created by ubu on 04/12/16.
  */
 public class Person {
-    private Car car;
+    private Optional<Car> car;
 
-    public Person(Car car) {
-        this.car = car;
+    public Person() {
+        car = Optional.empty();
     }
 
-    public Object getInsuranceName() {
-        if (car != null) {
-            if (car.getInsurance() != null) {
-                return car.getInsurance().getName();
-            }
-        }
-        return null;
+    public Person(Car car) {
+        this.car = Optional.of(car);
+    }
+
+    public String getInsuranceName() {
+        return car.flatMap(Car::getInsurance)
+                .map(Insurance::getName)
+                .orElse("Unknown");
     }
 }
