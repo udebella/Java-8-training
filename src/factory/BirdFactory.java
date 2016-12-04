@@ -12,6 +12,6 @@ public class BirdFactory {
             case Sparrow:
                 return new Sparrow();
         }
-        return null;
+        throw new IllegalArgumentException("Bird type " + type + " is not supported");
     }
 }
