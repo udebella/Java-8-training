@@ -16,7 +16,7 @@ public class ButtonCounterClickTest {
     public void setUp() {
         button = new Button();
         buttonCounterClick = new ButtonCounterClick();
-        button.addListener(buttonCounterClick);
+        button.addListener(buttonCounterClick::handleClick);
     }
 
     @Test
