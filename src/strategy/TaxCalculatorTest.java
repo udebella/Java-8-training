@@ -18,14 +18,12 @@ public class TaxCalculatorTest {
 
     @Test
     public void calculateTaxForSinglePerson() {
-        IPersonTypeCalculator personTypeCalculator = new SinglePersonCalculator();
-        assertEquals("Taxes should be 10% for a single person", 1000, taxCalculator.getTaxes(10000, personTypeCalculator), 0);
+        assertEquals("Taxes should be 10% for a single person", 1000, taxCalculator.getTaxes(10000, PersonTypeCalculator::calculateForSingle), 0);
     }
 
     @Test
     public void calculateTaxForMarriedPerson() {
-        IPersonTypeCalculator personTypeCalculator = new MarriedPersonCalculator();
-        assertEquals("Taxes should be 5% for a person wich is married", 500, taxCalculator.getTaxes(10000, personTypeCalculator), 0);
+        assertEquals("Taxes should be 5% for a person which is married", 500, taxCalculator.getTaxes(10000, PersonTypeCalculator::calculateForMarried), 0);
     }
 
 }
