@@ -3,9 +3,10 @@ package parallelStreams;
 import java.util.stream.IntStream;
 
 /**
+ * This implementation shows that to use parallel stream you should have a stateless process.
  * Created by ubu on 04/12/16.
  */
-public class SumingUtils {
+public class NonStatelessExample {
 
     /**
      * Correct way to implement sum to get it to work as parallel stream
