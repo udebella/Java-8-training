@@ -73,6 +73,19 @@ public class Directory {
         return printList(movies);
     }
 
+    public Map<Integer,Set<String>> retrieveMovieByYear() {
+        Map<Integer, Set<String>> movieByYear = new HashMap<>();
+        for (Actor actor : actorList) {
+            for (Movie movie : actor.getPlayedIn()) {
+                if (movieByYear.get(movie.getYear()) == null) {
+                    movieByYear.put(movie.getYear(), new HashSet<>());
+                }
+                movieByYear.get(movie.getYear()).add(movie.getName());
+            }
+        }
+        return movieByYear;
+    }
+
     public Map<String,List<Actor>> retrieveActorsByMovie() {
         Map<String, List<Actor>> actorsByMovie = new HashMap<>();
         for (Actor actor : actorList) {

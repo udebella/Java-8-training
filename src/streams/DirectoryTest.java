@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -94,6 +95,18 @@ public class DirectoryTest {
         assertEquals("It should print movies' name of 2004",
                 "Madame Édouard, L'Enquête Corse, Les choristes",
                 directory.printMoviesByYear(2004));
+    }
+
+    @Test
+    public void testGroupMovieByYear() {
+        Map<Integer, Set<String>> movieByYear = directory.retrieveMovieByYear();
+        assertEquals("It should ",
+                "[Les bronzés]",
+                movieByYear.get(1978).toString());
+
+        assertEquals("It should ",
+                "[Madame Édouard, L'Enquête Corse, Les choristes]",
+                movieByYear.get(2004).toString());
     }
 
     @Test
