@@ -5,8 +5,6 @@ import org.junit.Test;
 
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.assertTrue;
-
 /**
  * Created by ubu on 07/12/16.
  */

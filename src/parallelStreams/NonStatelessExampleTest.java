@@ -2,8 +2,6 @@ package parallelStreams;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by ubu on 04/12/16.
  */

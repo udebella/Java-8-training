@@ -2,10 +2,7 @@ package optionals;
 
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 /**
  * Created by ubu on 04/12/16.
