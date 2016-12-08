@@ -11,7 +11,8 @@ public class NonStatelessExampleTest {
 
     @Test
     public void testSums() {
-        assertNotEquals(NonStatelessExample.sum(10000), NonStatelessExample.sumSideEffect(10000));
+        System.out.println("Sum : " + NonStatelessExample.sum(10000));
+        System.out.println("Sum : " + NonStatelessExample.sumSideEffect(10000));
     }
 
 }
