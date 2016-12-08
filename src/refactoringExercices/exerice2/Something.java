@@ -7,7 +7,7 @@ import java.util.function.Function;
  * Created by ubu on 08/12/16.
  */
 public class Something {
-    public LigneDeStat doSomething(int reportYear, int reportYearReference) {
+    public LigneDeStat doSomething(int reportYear, int reportYearReference, int statistiqueValue) {
 
         Function<Integer, BiConsumer<LigneDeStat, Number>> getValueSetterGroupe = year -> (stat, value) -> {
             if (year == reportYear) {
@@ -22,7 +22,7 @@ public class Something {
 
 
         LigneDeStat nombreDeFactures = new LigneDeStat();
-        setValueGroupe.accept(nombreDeFactures, 24);
+        setValueGroupe.accept(nombreDeFactures, statistiqueValue);
 
         return nombreDeFactures;
     }
