@@ -3,6 +3,8 @@ package streams;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static streams.StreamAugment.distinctByKey;
+
 /**
  * Created by ubu on 03/12/16.
  */
@@ -64,6 +66,7 @@ public class Directory {
         return actorList.stream()
                 .map(Actor::getPlayedIn)
                 .flatMap(Collection::stream) // We convert Stream<List<Movie>> to Stream<Movie>
+                .filter(distinctByKey(Movie::getName)) // Distinct by property
                 .collect(Collectors.groupingBy(Movie::getYear));
     }
 

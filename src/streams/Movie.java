@@ -21,25 +21,6 @@ public class Movie {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Movie) {
-            return this.equals((Movie) obj);
-        }
-        return super.equals(obj);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + year;
-        return result;
-    }
-
-    public boolean equals(Movie movie) {
-        return movie.getName().equals(name) && movie.getYear() == year;
-    }
-
-    @Override
     public String toString() {
         return name;
     }
