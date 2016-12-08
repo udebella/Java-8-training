@@ -99,7 +99,7 @@ public class DirectoryTest {
 
     @Test
     public void testGroupMovieByYear() {
-        Map<Integer, Set<String>> movieByYear = directory.retrieveMovieByYear();
+        Map<Integer, Set<Movie>> movieByYear = directory.retrieveMovieByYear();
         assertEquals("It should ",
                 "[Les bronzés]",
                 movieByYear.get(1978).toString());
